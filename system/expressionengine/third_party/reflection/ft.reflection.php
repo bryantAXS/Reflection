@@ -11,29 +11,47 @@ class Reflection_ft extends EE_Fieldtype {
 	
 	var $mode_options = array(
 	  'clike'  => 'C like',
+	  'clojure' => 'Clojure',
+	  'coffeescript' => 'Coffeescript',
 	  'css'    => 'CSS',
 	  'diff'   => 'diff',
+	  'gfm'  => 'gfm',
+	  'groovy' => 'Groovy',
 	  'haskel' => 'Haskel',
 	  'htmlmixed'  => 'HTML Mixed',
 	  'javascript'    => 'Javascript',
 	  'lua'   => 'LUA',
+	  'markdown' => 'Markdown',
+	  'ntriples' => 'ntriples',
+	  'pascal' => 'pascal',
+	  'perl' => 'perl',
 	  'php' => 'PHP',
 	  'plsql'  => 'PLSQL',
 	  'python'    => 'Python',
+	  'r' => 'r',
+	  'rpm' => 'rpm',
 	  'rst'   => 'RST',
+	  'ruby' => 'Ruby',
+	  'rust' => 'Rust',
 	  'scheme' => 'Scheme',
 	  'smalltalk'  => 'Smalltalk',
 	  'sparql'    => 'SPARQL',
 	  'stex'   => 'STEX',
+	  'tiddlywiki' => 'tiddlywiki',
 	  'xml' => 'XML',
+	  'xmlpure' =>'xmlpure',
 	  'yaml' => 'YAML'
 	);                
 	
 	var $theme_options = array(
+		'cobalt' => 'Cobalt',
 	  'default'  => 'Default',
+	  'eclipse' => 'Eclipse',
 	  'elegant'    => 'Elegant',
+	  'monokai' => 'Monokai',
 	  'neat'   => 'Neat',
-	  'night' => 'Night'
+	  'night' => 'Night',
+	  'rubyblue' => 'Rubyblue'
 	);
 		
 	function Reflection_ft()

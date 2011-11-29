@@ -11,9 +11,9 @@ var Field = function(el){
 	self.$codemirror = false;
 
 	//clear default table sizes
-	self.$textarea.parents('table:eq(0)').find('th').css({'width':'auto'});
+	//self.$textarea.parents('table:eq(0)').find('th').css({'width':'auto'});
 
-}
+};
 Field.prototype.init_field = function(){
 	
 	var self = this;
@@ -29,26 +29,25 @@ Field.prototype.init_field = function(){
 	self.$codemirror = self.$textarea.next();
 	self.$codemirror.width(self.initial_width);
 
-}
+};
 Field.prototype.set_size = function(){
 	
 	var self = this;
-	var new_width = self.cell_type == 'matrix' ? self.$codemirror.parent().width() : $('#publish').width() - 25;
+	
+	//var new_width = self.cell_type == 'matrix' ? self.$codemirror.parent().width() : $('#publish').width() - 25;
+	//self.$codemirror.width(new_width);
 
-	self.$codemirror.width(new_width);
-
-}
+};
 
 
 $(document).ready(function(){
   
-  	
-	var page_fields = [];
+  var page_fields = [];
 		
 	$('textarea.codemirror').livequery(function() {
-	  
-	  var field = new Field(this);
-	  field.init_field();
+		
+		var field = new Field(this);
+		field.init_field();
 		
 		page_fields.push(field);
 		
@@ -58,8 +57,8 @@ $(document).ready(function(){
 		
 		$(page_fields).each(function(){
 			
-			var field = this;
-			field.set_size();
+			//var field = this;
+			//field.set_size();
 
 		});
 

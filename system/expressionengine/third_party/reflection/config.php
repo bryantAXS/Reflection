@@ -3,7 +3,7 @@
 if (! defined('REFLECTION_NAME'))
 {
 	define('REFLECTION_NAME', 'Reflection');
-	define('REFLECTION_VERSION',  '0.1');
+	define('REFLECTION_VERSION',  '1.0');
 }
 
 $config['name']    = REFLECTION_NAME;
