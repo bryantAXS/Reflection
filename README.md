@@ -2,7 +2,7 @@
 
 ## About
 
-Reflection is a fieldtype for ExpressionEngine that provides the user with a code editor.  The editor is powered by <a href='http://codemirror.net/'>Code Mirror</a> and features syntax specific highlighting and color themeing options.
+Reflection is a fieldtype for ExpressionEngine that provides site admins with a feature heavy code-editor.  The editor is powered by <a href='http://codemirror.net/'>Code Mirror</a> and features syntax specific highlighting and color themeing options.
 
 ## Install
 
