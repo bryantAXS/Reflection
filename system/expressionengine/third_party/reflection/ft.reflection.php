@@ -54,10 +54,11 @@ class Reflection_ft extends EE_Fieldtype {
 	  'rubyblue' => 'Rubyblue'
 	);
 		
-	function Reflection_ft()
+	function __construct()
 	{
 		
-		parent::EE_Fieldtype();
+	  if (version_compare(APP_VER, '2.1.4', '>')) { parent::__construct(); } else { parent::EE_Fieldtype(); } 
+
 		
 		//build theme url path
 	  $theme_folder_url = $this->EE->config->item('theme_folder_url');
