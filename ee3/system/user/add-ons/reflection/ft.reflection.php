@@ -58,7 +58,7 @@ class Reflection_ft extends EE_Fieldtype {
 		parent::__construct();
 
 		//build theme url path
-		$this->theme_url = URL_THIRD_THEMES."/reflection/";
+		$this->theme_url = URL_THIRD_THEMES."reflection/";
 	  
 		//prep-cache
 		if (! isset(ee()->session->cache['reflection']))
@@ -68,55 +68,18 @@ class Reflection_ft extends EE_Fieldtype {
 		$this->cache =& ee()->session->cache['reflection'];
 					
 	}
-	
-	/**
-	 * Display Field In the Publish Form
-	 */
-	function display_field($data)
-	{
-		  	  
-		if(! in_array('main_includes', $this->cache['includes'])){
-			$this->cache['includes']['main_includes'] = true;
-			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
-			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
-			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
-		}
 
-		$this->_include_theme_css($this->settings['theme']);
-		$this->_include_mode_js($this->settings['mode']);
-	  	  
-		return form_textarea(array(
-			'name'	=> $this->field_name,
-			'id'	=> $this->field_id,
-			'value'	=> $data,
-			'class' => 'codemirror',
-			'theme' => $this->settings['theme'],
-			'mode' => $this->settings['mode']
-		));
+	/**
+	 * Install Settings
+	 */
+	function install()
+	{
+	    return array(
+			'mode' => 'htmlmixed',
+			'theme'   => 'default'
+	    );
 	}
 	
-	function display_cell($data)
-	{
-		
-		if(! in_array('main_includes', $this->cache['includes'])){
-			$this->cache['includes']['main_includes'] = true;
-			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
-			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
-			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
-		}
-				
-		$this->_include_theme_css($this->settings['theme']);
-		$this->_include_mode_js($this->settings['mode']);
-			
-		return form_textarea(array(
-			'name'	=> $this->cell_name,
-			'id'	=> 'test',
-			'value'	=> $data,
-			'class' => 'codemirror matrix-textarea',
-			'theme' => $this->settings['theme'],
-			'mode' => $this->settings['mode']
-		));
-	}
 
 	/**
 	 * Display Global Settings
@@ -148,51 +111,7 @@ class Reflection_ft extends EE_Fieldtype {
 	{
 		return array_merge($this->settings, $_POST);
 	}
-	
-	// /**
-	//  * Display Cell Settings
-	//  */
-	// function display_cell_settings( $data )
-	// {
-	// // merge in default field settings
- //    $data = array_merge(
-	// 	array(
-	// 		'mode' => 'htmlmixed',
-	// 		'theme'   => 'default'
-	// 		),
-	// 		$data
- //    	);
-		                        
-	// 	return array(
-	// 		//Mode
-	// 		array(
-	// 			'Editor Mode',
-	// 			form_dropdown('mode', $this->mode_options, $data['mode'])
-	// 		),
 
- //  		//Theme
- //  		array(
- //  			'Editor Theme',
- //  			form_dropdown('theme', $this->theme_options, $data['theme'])
- //  		));
-	// }
-	
-	/**
-	 * Field Settings
-	 */
-	private function _field_settings($data, $attr = '')
-	{
-		// merge in default field settings
-		$theme = isset($data['theme']) ? $data['theme'] : $this->settings['theme'];
-		$data = array_merge(
-			array(
-				'mode' => 'htmlmixed',
-				'theme'   => 'default'
-	     		),
-	     	$data
-	     	);
-	}
-	
 	/**
 	 * Save Field Settings
 	 */
@@ -205,6 +124,53 @@ class Reflection_ft extends EE_Fieldtype {
 
 		return $settings;
 	}
+
+	/**
+	 * Display Field In the Publish Form
+	 */
+	function display_field($data)
+	{
+		if(! in_array('main_includes', $this->cache['includes'])){
+			$this->cache['includes']['main_includes'] = true;
+			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
+		}
+
+		$this->_include_theme_css($this->settings['theme']);
+		$this->_include_mode_js($this->settings['mode']);
+
+		return form_textarea(array(
+			'name'	=> $this->field_name,
+			'id'	=> $this->field_id,
+			'value'	=> $data,
+			'class' => 'codemirror',
+			'theme' => $this->settings['theme'],
+			'mode' => $this->settings['mode']
+		));
+	}
+	
+	function display_cell($data)
+	{
+		if(! in_array('main_includes', $this->cache['includes'])){
+			$this->cache['includes']['main_includes'] = true;
+			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
+		}
+				
+		$this->_include_theme_css($this->settings['theme']);
+		$this->_include_mode_js($this->settings['mode']);
+			
+		return form_textarea(array(
+			'name'	=> $this->cell_name,
+			'id'	=> 'test',
+			'value'	=> $data,
+			'class' => 'codemirror matrix-textarea',
+			'theme' => $this->settings['theme'],
+			'mode' => $this->settings['mode']
+		));
+	}
 	
 	/**
 	 * Replace the field tag on the front end
@@ -214,7 +180,37 @@ class Reflection_ft extends EE_Fieldtype {
 	  //must return the string to replace the tag
 	  return $data;
 	}
-	
+
+	/**
+	 * Field Settings
+	 */
+	private function _field_settings($data, $attr = '')
+	{
+		// merge in default field settings
+		$theme = isset($data['theme']) ? $data['theme'] : $this->settings['theme'];
+		$mode = isset($data['mode']) ? $data['mode'] : $this->settings['mode'];
+
+		$data = array_merge(
+			array(
+				'mode' => 'htmlmixed',
+				'theme'   => 'default'
+	     		),
+	     	$data
+		);
+		return array(
+			//Mode
+			array(
+				'Editor Mode',
+				form_dropdown('mode', $this->mode_options, $data['mode'])
+			),
+
+  		//Theme
+  		array(
+  			'Editor Theme',
+  			form_dropdown('theme', $this->theme_options, $data['theme'])
+  		));
+	}
+
 	/**
 	* Include Theme CSS
 	*/
