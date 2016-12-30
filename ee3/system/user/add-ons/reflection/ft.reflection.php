@@ -111,7 +111,7 @@ class Reflection_ft extends EE_Fieldtype {
 		}
 				
 		$this->_include_theme_css($this->settings['theme']);
-	  $this->_include_mode_js($this->settings['mode']);
+		$this->_include_mode_js($this->settings['mode']);
 			
 		return form_textarea(array(
 			'name'	=> $this->cell_name,
