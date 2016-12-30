@@ -57,16 +57,15 @@ class Reflection_ft extends EE_Fieldtype {
 		
 		parent::__construct();
 
-		
 		//build theme url path
 		$this->root_path = URL_THIRD_THEMES."/reflection/";
 	  
 		//prep-cache
-		if (! isset($this->EE->session->cache['reflection']))
+		if (! isset(ee()->session->cache['reflection']))
 		{
-			$this->EE->session->cache['reflection'] = array('includes' => array());
+			ee()->session->cache['reflection'] = array('includes' => array());
 		}
-		$this->cache =& $this->EE->session->cache['reflection'];
+		$this->cache =& ee()->session->cache['reflection'];
 					
 	}
 	
@@ -78,9 +77,9 @@ class Reflection_ft extends EE_Fieldtype {
 		  	  
 		if(! in_array('main_includes', $this->cache['includes'])){
 			$this->cache['includes']['main_includes'] = true;
-			$this->EE->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
-		  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
-		  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
+			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
 		}
 	  
 		$this->_include_theme_css($this->settings['theme']);
@@ -101,9 +100,9 @@ class Reflection_ft extends EE_Fieldtype {
 		
 		if(! in_array('main_includes', $this->cache['includes'])){
 			$this->cache['includes']['main_includes'] = true;
-			$this->EE->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
-			$this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
-			$this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
+			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
+			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
 		}
 				
 		$this->_include_theme_css($this->settings['theme']);
@@ -128,7 +127,7 @@ class Reflection_ft extends EE_Fieldtype {
 
 		foreach ($rows as $row)
 		{
-			$this->EE->table->add_row($row[0], $row[1]);
+			ee()->table->add_row($row[0], $row[1]);
 		}
 	}
 	
@@ -139,12 +138,12 @@ class Reflection_ft extends EE_Fieldtype {
 	{
 		// merge in default field settings
     $data = array_merge(
-     array(
-       'mode' => 'htmlmixed',
-       'theme'   => 'default'
-     ),
-     $data
-    );
+		array(
+			'mode' => 'htmlmixed',
+			'theme'   => 'default'
+			),
+			$data
+    	);
 		                        
 		return array(
 			//Mode
@@ -166,26 +165,26 @@ class Reflection_ft extends EE_Fieldtype {
 	private function _field_settings($data, $attr = '')
 	{
 		// merge in default field settings
-    $data = array_merge(
-     array(
-       'mode' => 'htmlmixed',
-       'theme'   => 'default'
-     ),
-     $data
-    );
-		               
+		$data = array_merge(
+			array(
+				'mode' => 'htmlmixed',
+				'theme'   => 'default'
+	     		),
+	     	$data
+	     	);
+			               
 		return array(
 			//Mode
 			array(
 				'Editor Mode',
-				form_dropdown('reflection[mode]', $this->mode_options, $data['mode'])
-			),
+					form_dropdown('reflection[mode]', $this->mode_options, $data['mode'])
+				),
 
-  		//Theme
-  		array(
-  			'Editor Theme',
-  			form_dropdown('reflection[theme]', $this->theme_options, $data['theme'])
-  		)
+	  		//Theme
+	  		array(
+	  			'Editor Theme',
+	  			form_dropdown('reflection[theme]', $this->theme_options, $data['theme'])
+	  		)
   		
 		);
 	}
@@ -195,7 +194,7 @@ class Reflection_ft extends EE_Fieldtype {
 	 */
 	function save_settings($settings)
 	{
-		$settings = $this->EE->input->post('reflection');
+		$settings = ee()->input->post('reflection');
 
 		// cross the T's
 		$settings['field_type'] = 'reflection';
@@ -224,7 +223,7 @@ class Reflection_ft extends EE_Fieldtype {
 		
 		if(! in_array($theme, $this->cache['includes']['theme']))  {
 			$this->cache['includes']['theme'][] = $theme;
-			$this->EE->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'theme/'.$theme.'.css" />');
+			ee()->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'theme/'.$theme.'.css" />');
 		}
 	
 	}
@@ -249,15 +248,15 @@ class Reflection_ft extends EE_Fieldtype {
 				$this->cache['includes']['mode'][] = 'css';
 				$this->cache['includes']['mode'][] = 'htmlmixed';
 		
-			  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/xml/xml.js"></script>');
-			  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/javascript/javascript.js"></script>');
-			  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/css/css.js"></script>');
-			  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/htmlmixed/htmlmixed.js"></script>');
+			  ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/xml/xml.js"></script>');
+			  ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/javascript/javascript.js"></script>');
+			  ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/css/css.js"></script>');
+			  ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/htmlmixed/htmlmixed.js"></script>');
 	    }
 	    else
 	    {
 				$this->cache['includes']['mode'][] = $mode;	
-	     	$this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/'.$mode.'/'.$mode.'.js"></script>');
+	     	ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'mode/'.$mode.'/'.$mode.'.js"></script>');
 			}
 		
 		}

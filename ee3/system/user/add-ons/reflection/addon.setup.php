@@ -9,7 +9,7 @@ return array(
 	'namespace'   => 'Reflection\Reflection',
 	'fieldtypes'	=> array(
 		'Reflection_ft' => array(
-			'name' => 'Reflection Code Editor',
+			'name' => 'reflection',
 			'compatibility' => 'text'
 		)
 	)
