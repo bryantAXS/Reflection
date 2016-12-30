@@ -57,14 +57,12 @@ class Reflection_ft extends EE_Fieldtype {
 	function __construct()
 	{
 		
-	  if (version_compare(APP_VER, '2.1.4', '>')) { parent::__construct(); } else { parent::EE_Fieldtype(); } 
+		parent::__construct();
 
 		
 		//build theme url path
-	  $theme_folder_url = $this->EE->config->item('theme_folder_url');
-		if (substr($theme_folder_url, -1) != '/') $theme_folder_url .= '/';
-		$this->theme_url = $theme_folder_url.'third_party/reflection/';
-		
+		$this->root_path = URL_THIRD_THEMES."/reflection/";
+	  
 		//prep-cache
 		if (! isset($this->EE->session->cache['reflection']))
 		{
@@ -87,8 +85,8 @@ class Reflection_ft extends EE_Fieldtype {
 		  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
 		}
 	  
-	  $this->_include_theme_css($this->settings['theme']);
-	  $this->_include_mode_js($this->settings['mode']);
+		$this->_include_theme_css($this->settings['theme']);
+		$this->_include_mode_js($this->settings['mode']);
 	  	  
 		return form_textarea(array(
 			'name'	=> $this->field_name,
@@ -106,8 +104,8 @@ class Reflection_ft extends EE_Fieldtype {
 		if(! in_array('main_includes', $this->cache['includes'])){
 			$this->cache['includes']['main_includes'] = true;
 			$this->EE->cp->add_to_head('<link rel="stylesheet" type="text/css" href="'.$this->theme_url.'lib/codemirror.css" />');
-		  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
-		  $this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
+			$this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
+			$this->EE->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
 		}
 				
 		$this->_include_theme_css($this->settings['theme']);
