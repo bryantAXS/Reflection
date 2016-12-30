@@ -1,12 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once PATH_THIRD.'reflection/config.php';
-
 class Reflection_ft extends EE_Fieldtype {
 
-	var $info = array(
-		'name'		=> REFLECTION_NAME,
-		'version'	=> REFLECTION_VERSION
+	public $info = array(
+		'name'		=> 'Reflection',
+		'version'	=> '1.1'
 	);
 	
 	var $mode_options = array(
