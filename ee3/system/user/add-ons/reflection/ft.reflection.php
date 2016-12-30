@@ -58,7 +58,7 @@ class Reflection_ft extends EE_Fieldtype {
 		parent::__construct();
 
 		//build theme url path
-		$this->root_path = URL_THIRD_THEMES."/reflection/";
+		$this->theme_url = URL_THIRD_THEMES."/reflection/";
 	  
 		//prep-cache
 		if (! isset(ee()->session->cache['reflection']))
@@ -81,7 +81,7 @@ class Reflection_ft extends EE_Fieldtype {
 			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'lib/codemirror.js"></script>');
 			ee()->cp->add_to_foot('<script type="text/javascript" src="'.$this->theme_url.'javascript/reflection.js"></script>');
 		}
-	  
+
 		$this->_include_theme_css($this->settings['theme']);
 		$this->_include_mode_js($this->settings['mode']);
 	  	  
@@ -117,7 +117,20 @@ class Reflection_ft extends EE_Fieldtype {
 			'mode' => $this->settings['mode']
 		));
 	}
-	
+
+	/**
+	 * Display Global Settings
+	 */
+	function display_global_settings()
+	{
+	    $val = array_merge($this->settings, $_POST);
+
+	    $form = form_label('mode', 'mode').NBS.form_dropdown('reflection[mode]', $this->mode_options, $data['mode']);
+	    $form .= form_label('theme', 'theme').NBS.form_dropdown('reflection[theme]', $this->theme_options, $data['theme']);
+
+	    return $form;
+	}
+
 	/**
 	 * Display Field Settings
 	 */
@@ -130,34 +143,39 @@ class Reflection_ft extends EE_Fieldtype {
 			ee()->table->add_row($row[0], $row[1]);
 		}
 	}
-	
-	/**
-	 * Display Cell Settings
-	 */
-	function display_cell_settings( $data )
-	{
-		// merge in default field settings
-    $data = array_merge(
-		array(
-			'mode' => 'htmlmixed',
-			'theme'   => 'default'
-			),
-			$data
-    	);
-		                        
-		return array(
-			//Mode
-			array(
-				'Editor Mode',
-				form_dropdown('mode', $this->mode_options, $data['mode'])
-			),
 
-  		//Theme
-  		array(
-  			'Editor Theme',
-  			form_dropdown('theme', $this->theme_options, $data['theme'])
-  		));
+	function save_global_settings()
+	{
+		return array_merge($this->settings, $_POST);
 	}
+	
+	// /**
+	//  * Display Cell Settings
+	//  */
+	// function display_cell_settings( $data )
+	// {
+	// // merge in default field settings
+ //    $data = array_merge(
+	// 	array(
+	// 		'mode' => 'htmlmixed',
+	// 		'theme'   => 'default'
+	// 		),
+	// 		$data
+ //    	);
+		                        
+	// 	return array(
+	// 		//Mode
+	// 		array(
+	// 			'Editor Mode',
+	// 			form_dropdown('mode', $this->mode_options, $data['mode'])
+	// 		),
+
+ //  		//Theme
+ //  		array(
+ //  			'Editor Theme',
+ //  			form_dropdown('theme', $this->theme_options, $data['theme'])
+ //  		));
+	// }
 	
 	/**
 	 * Field Settings
@@ -165,6 +183,7 @@ class Reflection_ft extends EE_Fieldtype {
 	private function _field_settings($data, $attr = '')
 	{
 		// merge in default field settings
+		$theme = isset($data['theme']) ? $data['theme'] : $this->settings['theme'];
 		$data = array_merge(
 			array(
 				'mode' => 'htmlmixed',
@@ -172,21 +191,6 @@ class Reflection_ft extends EE_Fieldtype {
 	     		),
 	     	$data
 	     	);
-			               
-		return array(
-			//Mode
-			array(
-				'Editor Mode',
-					form_dropdown('reflection[mode]', $this->mode_options, $data['mode'])
-				),
-
-	  		//Theme
-	  		array(
-	  			'Editor Theme',
-	  			form_dropdown('reflection[theme]', $this->theme_options, $data['theme'])
-	  		)
-  		
-		);
 	}
 	
 	/**
