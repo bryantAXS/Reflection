@@ -1,4 +1,4 @@
-#Reflection 1.0
+#Reflection 1.1
 
 ## About
 
@@ -6,8 +6,14 @@ Reflection is a fieldtype for ExpressionEngine that provides site admins with a 
 
 ## Install
 
+#### EE2
 * Download the code
 * Move into appropriate third-party directories (system/expressionengine/third-party and /themes/third-party)
+* Install Fieldtype
+
+#### EE3
+* Download the code
+* Move into appropriate third-party directories (system/user/add-ons and /themes/user)
 * Install Fieldtype
 
 ## Matrix
