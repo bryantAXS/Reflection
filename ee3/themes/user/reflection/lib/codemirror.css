@@ -10,7 +10,7 @@
      is visible outside of the scrolling box. */
   position: relative;
   /* Recenter div*/
-  float: right;
+  float: left;
   max-width: 38rem;
 }
 
