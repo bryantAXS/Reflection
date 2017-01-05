@@ -27,9 +27,9 @@ Field.prototype.init_field = function(){
 	});
 
 	self.$codemirror = self.$textarea.next();
-	// self.$codemirror.width(self.initial_width);
+	self.$codemirror.width(self.initial_width);
 	// FIXED 0px width in EE3
-	self.$codemirror.width("100%");
+	// self.$codemirror.width("100%");
 
 };
 Field.prototype.set_size = function(){
