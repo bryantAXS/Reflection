@@ -24,6 +24,7 @@ Field.prototype.init_field = function(){
 		,tabMode: "shift"
 		,theme: self.theme
 		,mode: self.mode
+		,autoRefresh: 4
 	});
 
 	self.$codemirror = self.$textarea.next();
@@ -65,7 +66,9 @@ $(document).ready(function(){
 		});
 
 	});
-      
+
+	// Fix the disappearing box issue
+
 });
 
 //jquery livequery plugin
