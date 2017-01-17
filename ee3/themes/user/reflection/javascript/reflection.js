@@ -24,13 +24,15 @@ Field.prototype.init_field = function(){
 		,tabMode: "shift"
 		,theme: self.theme
 		,mode: self.mode
-		,autoRefresh: 4
 	});
 
 	self.$codemirror = self.$textarea.next();
 	self.$codemirror.width(self.initial_width);
 	// FIXED 0px width in EE3
 	// self.$codemirror.width("100%");
+
+	// FIX HIDING ISSUE
+	setTimeout( cm.refresh, 0 )
 
 };
 Field.prototype.set_size = function(){
