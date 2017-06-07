@@ -12,6 +12,7 @@
   /* Recenter div*/
   float: left;
   max-width: 38rem;
+  border: 1px #cdcdcd solid;
 }
 
 .CodeMirror-gutter {

@@ -32,6 +32,9 @@ Field.prototype.init_field = function(){
 
 	// FIX HIDING ISSUE
 	setTimeout( cm.refresh, 1000 );
+	var x = $(".CodeMirror").parent().width();
+	$(".CodeMirror").width(x);
+	$(".CodeMirror-lines").width(x-13);
 };
 
 Field.prototype.set_size = function(){
