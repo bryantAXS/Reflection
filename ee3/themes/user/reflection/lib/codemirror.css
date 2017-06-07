@@ -9,6 +9,10 @@
   /* This is needed to prevent an IE[67] bug where the scrolled content
      is visible outside of the scrolling box. */
   position: relative;
+  /* Recenter div*/
+  float: left;
+  max-width: 38rem;
+  border: 1px #cdcdcd solid;
 }
 
 .CodeMirror-gutter {

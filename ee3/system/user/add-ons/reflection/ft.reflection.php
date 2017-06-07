@@ -148,6 +148,7 @@ class Reflection_ft extends EE_Fieldtype {
 			'theme' => $this->settings['theme'],
 			'mode' => $this->settings['mode']
 		));
+
 	}
 	
 	function display_cell($data)

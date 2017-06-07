@@ -27,11 +27,16 @@ Field.prototype.init_field = function(){
 	});
 
 	self.$codemirror = self.$textarea.next();
-	// self.$codemirror.width(self.initial_width);
-	// FIXED 0px width in EE3
-	self.$codemirror.width("100%");
+	self.$codemirror.width(self.initial_width);
+	// self.$codemirror.width("100%");
 
+	// FIX HIDING ISSUE
+	setTimeout( cm.refresh, 1000 );
+	var x = $(".CodeMirror").parent().width();
+	$(".CodeMirror").width(x);
+	$(".CodeMirror-lines").width(x-13);
 };
+
 Field.prototype.set_size = function(){
 	
 	var self = this;

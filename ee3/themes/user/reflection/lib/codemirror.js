@@ -257,6 +257,7 @@ var CodeMirror = (function() {
       getScrollerElement: function(){return scroller;},
       getGutterElement: function(){return gutter;}
     };
+    instance.refresh();
 
     function getLine(n) { return getLineAt(doc, n); }
     function updateLineHeight(line, height) {
